@@ -1,3 +1,5 @@
+from string import ascii_lowercase, digits
+
 class FormLogin:
     def __init__(self, lgn, psw):
         self.login = lgn
@@ -8,8 +10,8 @@ class FormLogin:
 
 class  TextInput:
 
-        CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя " + 'qwertyuiopasdfghjklzxcvbnm'
-        CHARS_CORRECT = CHARS + CHARS.upper() + '1234567890' + ' '
+        CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя " + ascii_lowercase
+        CHARS_CORRECT = CHARS + CHARS.upper() + digits
 
         def __init__(self, name, size=10):
             self.name = name
@@ -22,15 +24,15 @@ class  TextInput:
         @classmethod
         def check_name(cls, name):
             try:
-                assert 3 <= len(name) <= 50 and all(c in cls.CHARS_CORRECT for c in name)
+                assert 3 <= len(name) <= 50 and all(c in (cls.CHARS_CORRECT or ' ') for c in name)
             except AssertionError:    
                 raise ValueError("некорректное поле name")
             
 
 class PasswordInput:
 
-        CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя " + 'qwertyuiopasdfghjklzxcvbnm'
-        CHARS_CORRECT = CHARS + CHARS.upper() + '1234567890' + ' '
+        CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя " + ascii_lowercase
+        CHARS_CORRECT = CHARS + CHARS.upper() + digits
 
         def __init__(self, name, size=10):
             self.name = name
@@ -43,7 +45,7 @@ class PasswordInput:
         @classmethod
         def check_name(cls, name):
             try:
-                assert 3 <= len(name) <= 50 and all(c in cls.CHARS_CORRECT for c in name)
+                assert 3 <= len(name) <= 50 and all(c in (cls.CHARS_CORRECT or ' ') for c in name)
             except AssertionError:    
                 raise ValueError("некорректное поле name")
 
